@@ -1,5 +1,7 @@
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 
+const body = document.querySelector('body')
+
 const guesses = document.querySelector('.guesses');
 const lastResult = document.querySelector('.lastResult');
 const lowOrHi = document.querySelector('.lowOrHi');
@@ -7,8 +9,24 @@ const lowOrHi = document.querySelector('.lowOrHi');
 const guessSubmit = document.querySelector('.guessSubmit');
 const guessField = document.querySelector('.guessField');
 
+const toggleBackgroundBtn = document.querySelector('button')
+
 let guessCount = 1;
 let resetButton;
+
+const toggleBackground = () => {
+  let btnText = toggleBackgroundBtn.textContent
+
+  if (btnText === 'lights out') {
+    body.style.backgroundColor = "black"
+    body.style.color = "white"
+    toggleBackgroundBtn.textContent = "lights on"
+  } else if (btnText === 'lights on') {
+    body.style.backgroundColor = "white"
+    body.style.color = "black"
+    toggleBackgroundBtn.textContent = "lights out"
+  }
+}
 
 function checkGuess() {
   const userGuess = Number(guessField.value);
@@ -71,5 +89,7 @@ function resetGame() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
 }
 
+guessField.focus();
 guessSubmit.addEventListener('click', checkGuess);
+toggleBackgroundBtn.addEventListener('click', toggleBackground);
 
